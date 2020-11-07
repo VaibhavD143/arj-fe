@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { GlobalConstants } from '../global-constants';
 
 @Component({
   selector: 'app-test',
@@ -15,7 +16,7 @@ export class TestComponent implements OnInit {
   }
 
   onClick(){
-    this.httpClient.get("http://localhost:8010/admin/uom",{withCredentials:true}).subscribe(data=>{
+    this.httpClient.get(GlobalConstants.findAllUOMsUrl,{withCredentials:true}).subscribe(data=>{
       this.data = data; 
     },
     error=>{

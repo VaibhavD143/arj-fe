@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { GlobalConstants } from '../global-constants';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class LoginService {
 
   getLogin(username:String, password:String):Observable<any>{
     
-    return this.http.post("http://localhost:8010/login",{"username":username,"password":password},{withCredentials:true});
+    return this.http.post(GlobalConstants.loginUrl,{"username":username,"password":password},{withCredentials:true});
   }
 
 }
