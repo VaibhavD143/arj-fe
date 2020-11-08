@@ -11,13 +11,18 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { TestComponent } from './test/test.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDividerModule} from '@angular/material/divider';
+import {AdminModule} from './admin/admin.module';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateMRComponent,
     LoginComponent,
-    TestComponent
+    TestComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,9 +30,13 @@ import { TestComponent } from './test/test.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
+    MatCardModule,
     FormsModule,
     HttpClientModule,
-    
+    MatGridListModule,
+    MatDividerModule,
+    AdminModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -22,13 +22,13 @@ export class LoginComponent implements OnInit {
     this.loginService.getLogin(this.username,this.password).subscribe(data=>{
       console.log(data);
       alert("Success!");
-      this.router.navigateByUrl("/test");
+      this.router.navigateByUrl("/admin");
     },
     error=>{
       console.error(error);
       alert("failed");
     });
-    
+
   }
 
 }
