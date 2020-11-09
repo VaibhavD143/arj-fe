@@ -1,5 +1,6 @@
 export class Make {
   constructor(
+    public id: number,
     private doCreation: Date,
     private doCancellation: Date,
     private doRequiredDelivery: Date,

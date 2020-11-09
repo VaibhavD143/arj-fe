@@ -14,12 +14,18 @@ import { PositionComponent } from './position/position.component';
 import { HeaderComponent } from './header/header.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
+import { PopupComponent } from './popup/popup.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 @NgModule({
   declarations: [
     HomepageComponent,
     PositionComponent,
-    HeaderComponent],
+    HeaderComponent,
+    PopupComponent],
   imports: [
     CommonModule,
     MatGridListModule,
@@ -33,6 +39,9 @@ import {MatIconModule} from '@angular/material/icon';
     FormsModule,
     MatTableModule,
     MatIconModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
   ]
 })
 export class AdminModule { }
