@@ -1,3 +1,17 @@
-<p>test works!</p>
-<button mat-raised-button color="primary" (click)="onClick()">Login</button>
-{{this.data}}
+<!-- <button mdbBtn type="button" color="amber" class="waves-light" (click)="startUpload()" mdbWavesEffect>Start uploading</button> -->
+<div class="field">
+  <label>Resume:</label>
+  <input type="file" name="resume" (change)="handleFile($event.target.files)"/>
+</div>
+<button mdbBtn type="button" color="amber" class="waves-light" (click)=save() mdbWavesEffect>Upload</button>
+<br><br><br>
+<a href="http://localhost:8010/fileSystem/getPo?purchaseOrderId=3" download="">
+  <button mdbBtn type="button" color="amber" class="waves-light" mdbWavesEffect>Resource</button>
+</a>
+
+<br>
+<button mdbBtn type="button" color="amber" class="waves-light" (click)=delete() mdbWavesEffect>delete</button>
+<br>
+
+
+bye bye

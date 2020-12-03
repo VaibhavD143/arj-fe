@@ -1,0 +1,23 @@
+.title {
+  overflow: hidden;
+  background-color: #4545a6;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  color: white;
+}
+.left-title{
+  float: left;
+  margin: 20px;
+  font-size: 50px;
+}
+
+.right-title{
+  float: right;
+  margin: 10px 20px 0px 0px;
+  font-size: 20px;
+}
+
+.main {
+  margin-top: 60px;
+}

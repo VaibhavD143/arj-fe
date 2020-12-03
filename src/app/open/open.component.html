@@ -1,0 +1,11 @@
+<mat-card class="card">
+  <mat-card-content>
+    <app-material-request-table 
+      [columnsToDisplay]="columnsToDisplay" 
+      [columnsToFilter]="columnsToFilter" 
+      [data]="data"
+      (closed)="closeMaterialRequest($event)"
+      ></app-material-request-table>
+  </mat-card-content>
+</mat-card>
+<br>

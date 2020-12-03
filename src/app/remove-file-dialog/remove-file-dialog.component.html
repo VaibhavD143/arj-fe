@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Remove POs</h2>
+<mat-divider></mat-divider>
+<mat-dialog-content align="center">
+  <table width="100%">
+    <tr *ngFor="let purchaseOrder of purchaseOrders">
+      <td>
+        <h4>{{purchaseOrder.path.split("/")[1]}}</h4>
+      </td>
+      <td>
+        <a [href]="generateDownloadUrl(purchaseOrder.id)" download>
+          <button mat-raised-button color="primary">Download</button>
+        </a>
+        <button *ngIf="data.isProc" mat-raised-button color="warn" (click)="removePurchaseOrder(purchaseOrder.id)">Del</button>
+      </td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <!-- <button mat-raised-button [style]="'background-color:'+ data.btnBgColor+';color: white;'" [mat-dialog-close]="true" cdkFocusInitial >{{data.confirmTitle}}</button> -->
+  <button mat-raised-button [mat-dialog-close]="false">{{data.cancelTitle || "Close"}}</button>
+</mat-dialog-actions>

@@ -18,6 +18,12 @@ import { PopupComponent } from './popup/popup.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { OriginComponent } from './origin/origin.component';
+import { UomComponent } from './uom/uom.component';
+import { MakeComponent } from './make/make.component';
+import { CrudTableComponent } from './crud-table/crud-table.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ServiceComponent } from './service/service.component';
 
 
 @NgModule({
@@ -25,7 +31,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     HomepageComponent,
     PositionComponent,
     HeaderComponent,
-    PopupComponent],
+    PopupComponent,
+    OriginComponent,
+    UomComponent,
+    MakeComponent,
+    CrudTableComponent,
+    ServiceComponent],
   imports: [
     CommonModule,
     MatGridListModule,
@@ -42,6 +53,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatDialogModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    MatSelectModule,
   ]
 })
 export class AdminModule { }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateMRComponent } from './create-mr.component';
+import { ProcessedRequestComponent } from './processed-request.component';
 
-describe('CreateMRComponent', () => {
-  let component: CreateMRComponent;
-  let fixture: ComponentFixture<CreateMRComponent>;
+describe('ProcessedRequestComponent', () => {
+  let component: ProcessedRequestComponent;
+  let fixture: ComponentFixture<ProcessedRequestComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateMRComponent ]
+      declarations: [ ProcessedRequestComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateMRComponent);
+    fixture = TestBed.createComponent(ProcessedRequestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

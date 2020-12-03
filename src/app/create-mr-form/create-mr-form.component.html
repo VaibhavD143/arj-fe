@@ -1,0 +1,124 @@
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>New Material Request</mat-card-title>
+    <mat-card-subtitle>Create New MR</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <br>
+  <mat-card-content>
+    <form #createMrForm="ngForm">
+      <table class="full-width">
+        <tr>
+          <td>
+            <mat-form-field appearance="outline" class="full-width-margin">
+              <mat-label>Select Project</mat-label>
+              <mat-select required [(ngModel)]="selectedProject" name="project">
+                <mat-option>Select an option</mat-option>
+                <mat-option *ngFor="let project of projects" [value]="project">{{project.name}}</mat-option>
+              </mat-select>
+              <mat-hint align="end">Select a project</mat-hint>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field appearance="outline" class="full-width-margin">
+              <mat-label>Select Service</mat-label>
+              <mat-select required (selectionChange)="serviceChanged()" [(ngModel)]="selectedService" name="service">
+                <mat-option>Select an option</mat-option>
+                <mat-option *ngFor="let service of services" [value]="service">{{service.name}}</mat-option>
+              </mat-select>
+              <mat-hint align="end">Select a Service</mat-hint>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field appearance="outline" class="full-width-margin" >
+              <mat-label>Area/floor</mat-label>
+              <input matInput required name="areaFloor" [(ngModel)]="materialRequestWrapper.areaFloor">
+            </mat-form-field>      
+          </td>
+          <td>
+            <mat-form-field appearance="outline" class="full-width-margin" >
+              <mat-label>Instructions</mat-label>
+              <textarea matInput name="instruction" [(ngModel)]="materialRequestWrapper.instruction"></textarea>
+            </mat-form-field>      
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field appearance="outline" class="full-width-margin">
+              <mat-label>Required Date Of Delievery : </mat-label>
+              <input matInput [matDatepicker] = "doRequiredDelivery" name="doRequiredDelivery" [min]="today" [(ngModel)]="materialRequestWrapper.doRequiredDelivery" placeholder = "Choose a date">
+              <mat-datepicker-toggle matSuffix [for] = "doRequiredDelivery"></mat-datepicker-toggle>
+              <mat-datepicker #doRequiredDelivery></mat-datepicker>
+            </mat-form-field>      
+          </td>
+        </tr>
+      </table>
+      
+      <div [formGroup]="requestItemForm" class="full-width">
+        <div formArrayName="requestItems">
+          <h1 style="font-weight: 300;">Request Items</h1>
+          <button (click)="addRequestItem()" color="primary" mat-raised-button>Add RequestItem</button>
+          <div *ngFor="let requestItem of requestItems.controls; let i=index">
+            <!-- The repeated alias template -->
+            <div [formGroupName]="i">
+                <table class="full-width">
+                <tr>
+                  <td>
+                    <mat-form-field appearance="outline" class="full-width-margin">
+                      <mat-label>Quantity</mat-label>
+                      <input formControlName="quantity" required matInput pattern="[1-9][0-9]*" placeholder="Enter quantity" type="number">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field appearance="outline" class="full-width-margin">
+                      <mat-label>Select Item</mat-label>
+                      <mat-select formControlName="itemId" >
+                        <mat-option>Selecte an option</mat-option>
+                        <div *ngIf="selectedService!=null">
+                          <mat-option *ngFor="let item of selectedService.items" [value]="item.id">{{item.name+"-"+item.uom.unit}}</mat-option>
+                        </div>
+                      </mat-select>
+                      <mat-hint align="end">Select an Item</mat-hint>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field appearance="outline" class="full-width-margin">
+                      <mat-label>Select Make</mat-label>
+                      <mat-select formControlName="makeId">
+                        <mat-option value="">Select an option</mat-option>
+                        <!-- <mat-option value="option2">Option2</mat-option> -->
+                        <mat-option *ngFor="let make of makes" [value]="make.id">{{make.value}}</mat-option>
+                      </mat-select>
+                      <mat-hint align="end">Select a Make</mat-hint>
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <mat-form-field appearance="outline" class="full-width-margin">
+                      <mat-label>Select Origin</mat-label>
+                      <mat-select formControlName="originId">
+                        <mat-option value="">Select an Option</mat-option>
+                        <mat-option *ngFor="let origin of origins" [value]="origin.id">{{origin.value}}</mat-option>
+                      </mat-select>
+                      <mat-hint align="end">Select an Origin</mat-hint>
+                    </mat-form-field>    
+                  </td>
+                  <td>
+                    <button layout-align="center" (click)="deleteRequestItem(i)" color="warn" mat-raised-button>Del</button>
+                  </td>
+                </tr>                
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+  </form>
+  <div align="center">
+    <button style="width: 11%;" color="primary" mat-raised-button [disabled]="!createMrForm.form.valid || !requestItemForm.valid" (click)="onSubmit(createMrForm)">Create MR</button>
+  </div>
+  </mat-card-content>
+</mat-card>
+<br>

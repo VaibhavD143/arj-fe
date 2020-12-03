@@ -1,0 +1,52 @@
+- materialRequestComponent will take columns filter and data as an input will define all the coluns in single table
+Remaining:
+- redirection if 403
+- cross url prevention
+- GlobalError handling is not working,, links are on doc
+- set proper message in errorService as per the code
+- test approve and decline
+- doRequiredDelievery wihtout initial value
+- Loading redirection page
+- handle logout in backend
+- upgrade view based on local storage
+- test open and close
+- update Items population in createMrForm and update mapping in backend too.
+
+How to compare dates with custom comparator?
+https://stackoverflow.com/questions/10123953/how-to-sort-an-array-by-a-date-property
+https://stackoverflow.com/questions/36560806/the-left-hand-side-of-an-arithmetic-operation-must-be-of-type-any-number-or
+
+For sorting and filter:
+visit processed-request component
+
+For indexing with multiplRows true:
+https://stackoverflow.com/questions/49648270/how-to-define-index-in-angular-material-table/53525491
+
+making event call from child to parent sync:
+
+to update datasource of mattable:
+https://stackoverflow.com/questions/49284358/calling-renderrows-on-angular-material-table/50495353#50495353
+
+to update sorting arrow:
+https://stackoverflow.com/questions/51721367/how-to-change-the-color-of-sort-arrows-in-the-data-table-header-in-angular-mater
+
+download file:
+- anchor tag with download attribute will download the file from the href
+https://stackoverflow.com/questions/47936183/angular-file-upload
+
+sync calls:
+https://www.damirscorner.com/blog/posts/20170127-Angular2TutorialWithAsyncAndAwait.html
+
+File upload UI:
+https://malcoded.com/posts/angular-file-upload-component-with-express/
+https://github.com/LukasMarx/angular-file-upload
+
+sync data transfer between parent and child:
+https://www.digitalocean.com/community/tutorials/3-ways-to-pass-async-data-to-angular-2-child-components
+
+mat sort and mat expandable doesn't work together:
+https://github.com/angular/components/issues/11990
+
+resetting form on submission:
+https://stackoverflow.com/questions/34742023/how-to-clear-form-after-submit-in-angular-2
+and the way i did in createMrForm

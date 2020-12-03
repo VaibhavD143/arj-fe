@@ -1,7 +1,7 @@
 export class UOM {
   constructor(
     public id: number,
-    public value: string,
+    public unit: string,
     public isValid: boolean=true,
   ) {}
 }

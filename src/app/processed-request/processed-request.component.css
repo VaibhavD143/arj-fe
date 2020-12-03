@@ -1,0 +1,66 @@
+/* .mat-cell {
+  border-left: 0.5px solid rgba(0, 0, 0, 0.12);
+  border-right: 0.5px solid rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+ */
+.white-header .mat-header-cell {
+  /* border-left: 0.5px solid rgba(0, 0, 0, 0.12);
+  border-right: 0.5px solid rgba(0, 0, 0, 0.12);
+  text-align: center; */
+  color: white;
+}
+.row-bg-color {
+  background-color: rgb(247, 247, 247);
+}
+.header-bg-color {
+  background-color: #4545a6;
+}
+
+
+/* to change color of arrows to white */
+::ng-deep .mat-sort-header-arrow {
+  color: white;
+}
+
+/* to change opacity of arrow when it is not clicked */
+::ng-deep .mat-sort-header-container:not(.mat-sort-header-sorted) .mat-sort-header-arrow {
+  opacity: 0.5 !important;
+  transform: translateY(0px) !important;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.half-width{
+  width: 50%;
+}
+
+tr.lst-detail-row {
+  height: 0;
+}
+
+tr.lst-element-row:not(.lst-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.lst-element-row:not(.lst-expanded-row):active {
+  background: #efefef;
+}
+
+.lst-element-row td {
+  border-bottom-width: 0;
+}
+
+.lst-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+
+.card {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}

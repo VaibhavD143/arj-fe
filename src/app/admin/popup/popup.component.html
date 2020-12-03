@@ -1,10 +1,11 @@
-<ng-template [ngIf]="data['element']=='position'">
-  <h1 mat-dialog-title>Position</h1>
+<h2 mat-dialog-title>{{data['elementName'] | uppercase}}</h2>
+
+<ng-template [ngIf]="data['elementName']=='position'">
   <ng-container mat-dialog-content >
     <div width="100%">
       <tr width="100%">
         <td width="100%">
-          <mat-form-field appearance="fill"width="100%">
+          <mat-form-field appearance="fill" width="100%">
             <mat-label>Enter position name</mat-label>
             <input matInput #name="ngModel" required placeholder="Enter position name" [(ngModel)]="position.name">
           </mat-form-field>
@@ -32,12 +33,86 @@
   </ng-container>
   <div mat-dialog-actions>
     <button mat-raised-button color="primary" (click)="onNoClick()">Cancel</button>
-    <button [disabled]="name.invalid||code.invalid||hierarchy.invalid" mat-raised-button color="accent" [mat-dialog-close]="position" cdkFocusInitial>Submit</button>
+    <button [disabled]="name.invalid||code.invalid||hierarchy.invalid" mat-raised-button color="accent" [mat-dialog-close]="position">Submit</button>
   </div>
 </ng-template>
 
-<ng-template [ngIf]="data['element']=='delete'">
-  <h1 mat-dialog-title>Delete</h1>
+<ng-template [ngIf]="data['elementName']=='make'">
+  <ng-container mat-dialog-content >
+    <form #makeForm="ngForm">
+
+      <mat-form-field appearance="outline" width="100%">
+        <mat-label>Enter Make Value</mat-label>
+        <input matInput name="value" required placeholder="Enter Make Value" [(ngModel)]="make.value">
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline" width="100%">
+        <mat-label>IsValid</mat-label>
+        <mat-select required [(ngModel)]="make.isValid" name="isValid">
+          <mat-option [value]="false">False</mat-option>
+          <mat-option [value]="true">True</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+    </form>
+
+  </ng-container>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onNoClick()">Cancel</button>
+    <button [disabled]="!makeForm.form.valid" mat-raised-button color="accent" [mat-dialog-close]="make">Submit</button>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="data['elementName']=='origin'">
+  <ng-container mat-dialog-content >
+    <form #originForm="ngForm">
+
+      <mat-form-field appearance="outline" width="100%">
+        <mat-label>Enter Origin Value</mat-label>
+        <input matInput name="value" required placeholder="Enter Origin Value" [(ngModel)]="origin.value">
+      </mat-form-field>
+    </form>
+  </ng-container>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onNoClick()">Cancel</button>
+    <button [disabled]="!originForm.form.valid" mat-raised-button color="accent" [mat-dialog-close]="origin">Submit</button>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="data['elementName']=='uom'">
+  <ng-container mat-dialog-content >
+    <form #uomForm="ngForm">
+      <mat-form-field appearance="outline" width="100%">
+        <mat-label>Enter UOM Unit</mat-label>
+        <input matInput name="unit" required placeholder="Enter UOM Unit" [(ngModel)]="uom.unit">
+      </mat-form-field>
+    </form>
+  </ng-container>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onNoClick()">Cancel</button>
+    <button [disabled]="!uomForm.form.valid" mat-raised-button color="accent" [mat-dialog-close]="uom">Submit</button>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="data['elementName']=='service'">
+  <ng-container mat-dialog-content >
+    <form #serviceForm="ngForm">
+      <mat-form-field appearance="outline" width="100%">
+        <mat-label>Enter Service Name</mat-label>
+        <input matInput name="name" required placeholder="Enter Service Name" [(ngModel)]="service.name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" width="100%">
+        <mat-label>Enter Service Code</mat-label>
+        <input matInput name="code" required placeholder="Enter Code Name" [(ngModel)]="service.code">
+      </mat-form-field>
+    </form>
+  </ng-container>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onNoClick()">Cancel</button>
+    <button [disabled]="!serviceForm.form.valid" mat-raised-button color="accent" [mat-dialog-close]="service">Submit</button>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="data['elementName']=='delete'">
   <ng-container mat-dialog-content >
     <td>Are you sure you want to delete this element?</td>
   </ng-container>

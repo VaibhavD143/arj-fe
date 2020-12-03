@@ -4,6 +4,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {PopupComponent} from '../popup/popup.component';
 import {AdminService} from '../../services/admin.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { NotificationService } from 'src/app/utils/notification.service';
+import { ErrorService } from 'src/app/utils/error.service';
 
 @Component({
   selector: 'app-position',
@@ -12,111 +14,146 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class PositionComponent implements OnInit {
 
-  displayedColumns = ['name', 'code', 'hierarchy', 'canCreate', 'canEnd', 'update', 'delete'];
-  dataSource=new MatTableDataSource<Position>();
-  updatedPosition:Position;
+  columnsToDisplay = ['name', 'code', 'hierarchy', 'canCreate', 'canEnd', 'update', 'delete'];
+  // dataSource=new MatTableDataSource<Position>();
+  // updatedPosition:Position;
+  data;
 
-
-  constructor(public dialog: MatDialog, public adminService:AdminService) {}
+  constructor(
+    public dialog: MatDialog,
+    public adminService:AdminService,
+    private notifier : NotificationService,
+    private errorService : ErrorService) {}
 
   ngOnInit(): void {
-    this.getPositions();
+    this.loadData();
   }
 
-  public getPositions(){
+  public loadData(){
     this.adminService.getPositions().subscribe(
       data=>{
         console.log(data);
-        this.dataSource.data=<Position[]> data;
+        this.data=data;
+      },
+      error=>{
+        this.notifier.showError(this.errorService.getServerMessage(error));
       }
     )
   }
 
-  public openSavePositionPopup(){
-    const dialogRef = this.dialog.open(PopupComponent, {
-      width: "40%",
-      data: {element: 'position'}
-    });
+  // public getPositions(){
+  //   this.adminService.getPositions().subscribe(
+  //     data=>{
+  //       console.log(data);
+  //       this.dataSource.data=<Position[]> data;
+  //     },
+  //     error=>{
+  //       this.notifier.showError(this.errorService.getServerMessage(error));
+  //     }
+  //   )
+  // }
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result!=undefined)
-        this.save(result);
-    });
-  }
+  // public openSavePositionPopup(){
+  //   const dialogRef = this.dialog.open(PopupComponent, {
+  //     width: "40%",
+  //     data: {element: 'position'}
+  //   });
 
-  public save(position){
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if(result!=undefined)
+  //       this.save(result);
+  //   });
+  // }
+
+  public savePosition(data){
+    let position = data['element'];
+    let dataSource = data['dataSource'];
+
     this.adminService.savePosition(position).subscribe(
       data=>{
         console.log(data);
-        this.dataSource.data.push(<Position>data);
-        this.dataSource._updateChangeSubscription();
+        dataSource.data.push(<Position>data);
+        dataSource._updateChangeSubscription();
+        this.notifier.showSuccess("Saved Successfully");
       },
       error => {
-        console.log('error in saving');
+        this.notifier.showError(this.errorService.getServerMessage(error));
       },
     )
   }
+    
+  // public openUpdatePositionPopup(position:Position){
+  //   const dialogRef = this.dialog.open(PopupComponent, {
+  //     width: "40%",
+  //     data: {
+  //       element: 'position',
+  //       position: position,
+  //       update: true}
+  //     });
+      
+  //     dialogRef.afterClosed().subscribe(result => {
+  //   if(result!=undefined)
+  //     this.update(result);
+  //   });
+  // }
 
-  public openUpdatePositionPopup(position:Position){
-    const dialogRef = this.dialog.open(PopupComponent, {
-      width: "40%",
-      data: {
-        element: 'position',
-        position: position,
-        update: true}
-    });
+  public updatePosition(data) {
+    let position = data['element'];
+    let dataSource = data['dataSource'];
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result!=undefined)
-        this.update(result);
-    });
-  }
-
-  public update(position) {
     this.adminService.updatePosition(position).subscribe(
       data=>{
         console.log(data);
         let i=0;
-        for(;i<this.dataSource.data.length;++i){
-          if(this.dataSource.data[i].id==position.id)
-            this.dataSource.data[i]=position;
+        for(;i<dataSource.data.length;++i){
+          if(dataSource.data[i].id==position.id)
+          dataSource.data[i]=position;
         }
-        this.dataSource._updateChangeSubscription();
+        dataSource._updateChangeSubscription();
+        this.notifier.showSuccess("Updated Successfully");
       },
       error => {
-        console.log('error in updating');
+        this.notifier.showError(this.errorService.getServerMessage(error));
       },
     );
     return undefined;
   }
 
-  public openConfirmDeletePopup(position:Position){
-    const dialogRef = this.dialog.open(PopupComponent, {
-      width: "40%",
-      data: {
-        element: 'delete',
-      }
-    });
+  // public openConfirmDeletePopup(position:Position){
+  //   const dialogRef = this.dialog.open(PopupComponent, {
+  //     width: "40%",
+  //     data: {
+  //       element: 'delete',
+  //     }
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if(result!=undefined){
-        this.delete(position);
-      }
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(result);
+  //     if(result!=undefined){
+  //       this.delete(position);
+  //     }
+  //   });
+  // }
 
-  public delete(position:Position){
+  public deletePosition(data){
+    let position = data['element'];
+    let dataSource = data['dataSource'];
+
     console.log('delete'+JSON.stringify(position));
-    this.adminService.deletePosition(position.id).subscribe();
-    let i=0;
-    for(;i<this.dataSource.data.length;++i){
-      if(this.dataSource.data[i].id==position.id){
-        break;
+    
+    this.adminService.deletePosition(position.id).subscribe(data=>{
+      let i=0;
+      for(;i<dataSource.data.length;++i){
+        if(dataSource.data[i].id==position.id){
+          break;
+        }
       }
-    }
-    this.dataSource.data.splice(i,1);
-    this.dataSource._updateChangeSubscription();
-    console.log(this.dataSource);
+      dataSource.data.splice(i,1);
+      dataSource._updateChangeSubscription();
+      this.notifier.showSuccess("Deleted Successfully");
+    },
+    error=>{
+      this.notifier.showError(this.errorService.getServerMessage(error));
+    });
   }
 }

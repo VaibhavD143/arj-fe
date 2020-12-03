@@ -1,0 +1,41 @@
+<div class="title">
+  <div class="left-title">
+    <!-- <h1>MR PORTAL</h1> -->
+    MR PORTAL
+  </div>
+  <div class="right-title">
+    {{storageService.get("name")}} | {{storageService.get("rolename")}}
+    <br>
+    <a [routerLink]="" (click)="logout()" style="text-decoration: none;color: white;"><span style="font-size: 15px;">Logout</span></a>
+  </div>
+</div>
+
+<div class="main">
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab *ngIf="navConfig['createMr']" label="Create MR">
+      <ng-template matTabContent>
+        <app-create-mr-form></app-create-mr-form>
+      </ng-template>
+    </mat-tab>
+    <mat-tab *ngIf="navConfig['pending']" label="Pending">
+      <ng-template matTabContent>
+        <app-pending-request></app-pending-request>
+      </ng-template>
+    </mat-tab>
+    <mat-tab *ngIf="navConfig['processed']" label="Processed">
+      <ng-template matTabContent>
+        <app-processed-request></app-processed-request>
+      </ng-template>
+    </mat-tab>
+    <mat-tab *ngIf="navConfig['open']" label="Open">
+      <ng-template matTabContent>
+        <app-open></app-open>
+      </ng-template>
+    </mat-tab>
+    <mat-tab *ngIf="navConfig['closed']" label="Closed">
+      <ng-template matTabContent>
+        <app-closed></app-closed>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
